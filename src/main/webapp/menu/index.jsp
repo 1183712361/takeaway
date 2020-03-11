@@ -73,12 +73,7 @@
 							<li style="height:30px;">
 								<a href="${AppPath }/menutype/index" style="color:red;"><i class="glyphicon glyphicon-user"></i> 商家维护</a> 
 							</li>
-							<li style="height:30px;">
-								<a href="role.html"><i class="glyphicon glyphicon-king"></i> 角色维护</a> 
-							</li>
-							<li style="height:30px;">
-								<a href="permission.html"><i class="glyphicon glyphicon-lock"></i> 许可维护</a> 
-							</li>
+						
 						</ul>
 					</li>
 					
@@ -88,7 +83,12 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 			<div class="panel panel-default">
 			  <div class="panel-heading">
-				<h3 class="panel-title"><i class="glyphicon glyphicon-th"></i> 数据列表</h3>
+				<ol class="breadcrumb">
+				  <li><a href="#">首页</a></li>
+				  <li><a href="${AppPath }/menutype/index">商家列表</a></li>
+				  <li class="active">${user.uname }</li>
+				</ol>
+				
 			  </div>
 			  <div class="panel-body">
 <form class="form-inline" role="form" style="float:left;" id="userForm">
@@ -101,7 +101,8 @@
   <button type="button" id="btnSearch" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询</button>
 </form>
 <button type="button" class="btn btn-danger" onclick="delUsers()" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> 删除</button>
-<button type="button" class="btn btn-primary" style="float:right;" onclick="window.location.href='${AppPath }/user/userAdd'"><i class="glyphicon glyphicon-plus"></i> 新增</button>
+<button type="button" class="btn btn-primary" style="float:right;margin-left:10px;" onclick="window.location.href='${AppPath }/user/userAdd'"><i class="glyphicon glyphicon-plus"></i> 新增</button>
+<button type="button" class="btn btn-success" style="float:right;" onclick="window.location.href='${AppPath }/orders/index'"><i class="glyphicon glyphicon-plus"></i> 查看订单<span id="orderNum"></span></button>
 <br>
  <hr style="clear:both;">
           <div class="table-responsive">
@@ -141,7 +142,7 @@
             </table>
             
             <input type="hidden" id="mtid" name="mtid" value="${mtid }">
-            <input type="hidden" id="uid" name="uid" value="${uid }">
+            <input type="hidden" id="bid" name="bid" value="${bid }">
            </form>
           </div>
 			  </div>
@@ -209,7 +210,7 @@
             		jsonData.queryVal=$("#searchValue").val();        		
             	}
             	jsonData.mtid=$("#mtid").val();
-				jsonData.uid=$("#uid").val();            	
+				jsonData.bid=$("#bid").val();            	
 	            	$.ajax({
 	            		cache:false,
 	            		url:"${AppPath }/menu/checkMenu",
@@ -229,7 +230,7 @@
 	            	                  tableStr+="<td>"+menu.mname+"</td>";
 	            	                  tableStr+="<td>"+menu.mprice+"</td>";
 	            	                  tableStr+="<td>";
-	            					  tableStr+="<button type='button' onclick='checkMenu("+menu.mid+','+menu.uid+")' class='btn btn-success btn-xs'>查看菜单<i class=' glyphicon glyphicon-check'></i></button>";
+	            					  tableStr+="<button type='button' onclick='addOrder("+menu.mid+','+menu.mprice+")' class='btn btn-success btn-xs'>点餐<i class=' glyphicon glyphicon-check'></i></button>";
 	            					  tableStr+="</td>";
 	            					  tableStr+="</tr>";
 	            					
@@ -260,8 +261,20 @@
 	            }
             
             	
-            	function checkMenu(mtid,uid){
-            		window.location.href="${AppPath}/menu/index?mtid="+mtid+"&uid="+uid;	
+            	function addOrder(mid,mprice){
+            		var bid = $("#bid").val();
+            		$.ajax({
+            			url:"${AppPath}/orders/addOrder",
+            			type:"post",
+            			data:{"mid":mid,"bid":bid,"mprice":mprice},
+            			success:function(data){
+            				if(data.flag){
+            					layer.msg("订餐成功!", {time:1000, icon:1, shift:5}, function(){});
+            				}else{
+            					layer.msg("订餐失败!", {time:1000, icon:0, shift:5}, function(){});
+            				}
+            			}
+            		});
             	}
             
           

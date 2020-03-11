@@ -2,4 +2,61 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.woniu.dao.OrdersDao">
  
+ <insert id="save" parameterType="Orders">
+ 	insert into orders(oid,otime,ostatus,ototalprice,uid,bid,tid,uremork) values (#{oid},#{otime},#{status},#{ototalprice},#{uid},#{business.uid},#{takeAwayMan.uid},#{uremork})
+ 	  <!-- <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="oid!= null">
+        oid,
+      </if>
+      <if test="otime!= null">
+        otime,
+      </if>
+      <if test="ostatus!= null">
+        ostatus,
+      </if>
+       <if test="ototalprice!= null">
+        ototalprice,
+      </if>
+       <if test="uid!= null">
+        uid,
+      </if>
+       <if test="business!= null">
+        bid,
+      </if>
+       <if test="takeAwayMan!= null">
+        tid,
+      </if>
+        <if test="uremork!= null">
+        uremork,
+      </if>
+    </trim> 
+    <trim prefix=" values (" suffix=")" suffixOverrides=",">
+      <if test="oid!= null">
+        #{oid},
+      </if>
+      <if test="otime!= null">
+        #{otime},
+      </if>
+      <if test="ostatus!= null">
+        #{ostatus},
+      </if>
+       <if test="ototalprice!= null">
+        #{ototalprice},
+      </if>
+       <if test="uid!= null">
+        #{uid},
+      </if>
+       <if test="business != null">
+        #{business.uid},
+      </if>
+       <if test="takeAwayMan != null">
+        #{takeAwayMan.uid},
+      </if>
+        <if test="uremork != null">
+        #{uremork},
+      </if>
+    </trim>  -->
+    
+ </insert>
+ 
 </mapper>

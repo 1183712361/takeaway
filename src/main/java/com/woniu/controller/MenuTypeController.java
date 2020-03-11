@@ -13,6 +13,7 @@ import com.woniu.service.IMenuTypeService;
 @Controller
 @RequestMapping("menutype")
 public class MenuTypeController {
+	
 	@Autowired
 	IMenuTypeService menutypeService;
 	@RequestMapping("index")

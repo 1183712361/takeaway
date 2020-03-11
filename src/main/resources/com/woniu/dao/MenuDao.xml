@@ -9,14 +9,14 @@
  	<include refid="base_col_menu"></include>
  	from menu
  	<where>
- 		mtid=#{mtid} and bid=#{uid}
+ 		mtid=#{mtid} and bid=#{bid}
  	</where>	
  </select>
 
  <select id="countCheck" resultType="int">
  	select count(*)	from menu
  	<where>
- 		mtid=#{mtid} and bid=#{uid}
+ 		mtid=#{mtid} and bid=#{bid}
  	</where>
  </select> 
  

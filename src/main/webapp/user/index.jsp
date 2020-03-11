@@ -209,6 +209,8 @@
             	if(searchFlag){
             		jsonData.queryVal=$("#searchValue").val();        		
             	}
+            	var rid=$("#loginRid").val();
+            	if(rid=="2"){
             	
 	            	$.ajax({
 	            		cache:false,
@@ -262,8 +264,16 @@
 	            				
 	            		}
 	            	});
+            	}else{
+            		  goBusiness();
+            		  function goBusiness(){
+                      	window.location.href="${AppPath}/menutype/index";
+                      }
+            		
+            	}
 	           
-            }  	
+            }
+            
             function updateUser(uid){
             	window.location.href="${AppPath}/user/userUpdForm?uid="+uid;
             }

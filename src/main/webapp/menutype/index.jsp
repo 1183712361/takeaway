@@ -111,10 +111,9 @@
                 <tr >
                   <th width="30">#</th>
 				  <th width="30"><input type="checkbox" id="checkAll" ></th>
-                  <th>账号</th>
+                  <th>电话</th>
                   <th>名称</th>
                   <th>地址</th>
-                  <th>状态</th>
                   <th>菜单</th>
                   <th width="100">操作</th>
                 </tr>
@@ -143,7 +142,7 @@
 			  </tfoot>
             </table>
             
-            <input type="hidden" id="loginRid" name="rid" value="${loginUser.role.rid }">
+            <input type="hidden" id="loginRid" name="rid" value="${loginUser.role.rid }" >
            </form>
           </div>
 			  </div>
@@ -230,7 +229,6 @@
 	            	                  tableStr+="<td>"+mtype.user.uaccount+"</td>";
 	            	                  tableStr+="<td>"+mtype.user.uname+"</td>";
 	            	                  tableStr+="<td>"+mtype.user.uaddress+"</td>";
-	            	                  tableStr+="<td>"+mtype.user.ustatus+"</td>";
 	            	                  tableStr+="<td>"+mtype.mtname+"</td>";
 	            	                  tableStr+="<td>";
 	            					  tableStr+="<button type='button' onclick='checkMenu("+mtype.mtid+','+mtype.user.uid+")' class='btn btn-success btn-xs'>查看菜单<i class=' glyphicon glyphicon-check'></i></button>";
@@ -265,7 +263,7 @@
             
             	
             	function checkMenu(mtid,uid){
-            		window.location.href="${AppPath}/menu/index?mtid="+mtid+"&uid="+uid;	
+            		window.location.href="${AppPath}/menu/index?mtid="+mtid+"&bid="+uid;	
             	}
             
           

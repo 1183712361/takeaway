@@ -19,7 +19,13 @@ import com.woniu.service.IUserService;
 public class UserController {
 	@Autowired
 	IUserService userService;
-	@RequestMapping("index")
+	/**
+	 * 模拟登录，登录部分直接删掉就行。
+	 * 1、用户展示页面，如果rid角色不是管理员直接跳到菜单页面
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("index")//用户展示
 	public String index(HttpSession session) {
 		User loginUser = new User();
 		Role role = new Role();
@@ -31,6 +37,12 @@ public class UserController {
 		return "user/index";
 	}
 	
+	/**
+	 * user目录下，点击个人信息可以查看个人信息
+	 * @param uid
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("userInfo")
 	public String userInfo(Integer uid,Model model) {
 		User user = userService.findOne(uid);
@@ -62,7 +74,11 @@ public class UserController {
 	}
 	
 	
-	
+	/**
+	 * 修改个人信息
+	 * @param user
+	 * @return
+	 */
 	@RequestMapping("userUpdate")
 	@ResponseBody
 	public Object userUpdate(User user) {
